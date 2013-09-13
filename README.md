@@ -66,10 +66,10 @@ a new card that lets you choose both which Wallet Class to create and which Rend
 Specs to use. Use the drop-down menus to choose and then click `Load Template`.
 Fill out all the fields relevant for your class, as well as the several
 required fields for classes that must be specified before insertion. For more
-information about the required fields, refer to the [Wallet Objects API Reference] [6].
+information about the required fields, refer to the [Wallet Objects API Reference] [7].
 Clicking `Save` below the item card will insert the item into your issuer id.
 
-  [6]: https://developers.google.com/commerce/wallet/objects/reference/v1/
+  [7]: https://developers.google.com/commerce/wallet/objects/reference/v1/
 
 #### Object
 
