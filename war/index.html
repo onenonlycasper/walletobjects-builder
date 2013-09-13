@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Wallet Objects</title>
+
+<!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+<script type="text/javascript" src="js/libraries/jquery/jquery.tools.min.js"></script>
+<script type="text/javascript" src="js/libraries/jquery/jquery.isotope.min.js"></script>
+<script type="text/javascript" src="js/libraries/jquery/jquery.isotope.centered-mod.js"></script>
+<script type="text/javascript" src="js/libraries/jquery/jquery.infinitescroll.min.js"></script>
+<script type="text/javascript" src="js/libraries/handlebars.js" type="text/javascript"></script>
+<script type="text/javascript" src="js/libraries/imagesloaded.pkgd.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="/js/libraries/compiled.js"></script>
+<script type="text/javascript"
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKfeO7hpxDuMhI9gdCtiDM3lNcpa9pjGU&libraries=places&sensor=false">
+</script>
+<!-- Wobs js -->
+<script type="text/javascript" src="/js/ui.js"></script>
+<script type="text/javascript" src="/js/wobs.js"></script>
+<script type="text/javascript" src="/js/constants.js"></script>
+<script type="text/javascript" src="/js/maps.js"></script>
+<script type="text/javascript" src="/js/server.js"></script>
+<script type="text/javascript" src="/js/page.js"></script>
+<script type="text/javascript" src="/js/helpers.js"></script>
+<script type="text/javascript" src="/js/handlebars-helpers.js"></script>
+<!-- Barcode js -->
+<script type="text/javascript" src="js/libraries/barcode/bwip.js"></script>
+<script type="text/javascript" src="js/libraries/barcode/lib/symdesc.js"></script>
+<script type="text/javascript" src="js/libraries/barcode/lib/needyoffset.js"></script>
+<script type="text/javascript" src="js/libraries/barcode/lib/canvas.js"></script>
+<script type="text/javascript" src="js/libraries/barcode/render-barcode.js"></script>
+
+<!-- demo_css - kennedy css -->
+<link type="text/css" rel="stylesheet" href="/stylesheets/demo_css.css" />
+<link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
+<link href='//fonts.googleapis.com/css?family=Roboto' rel='stylesheet'
+  type='text/css'>
+</head>
+
+<body>
+  <div id="topBar">
+    <div id="title">
+      <h1>Google Wallet Objects</h1>
+    </div>
+    <input type="text" class="jfk-textinput" id="search" />
+    <div role="button" class="goog-inline-block jfk-button jfk-button-action" id="searchbutton">
+      <img src="//ssl.gstatic.com/ui/v1/button/search-white.png" class="jfk-button-img" style="width: 21px; height: 21px;" />
+    </div>
+  </div>
+
+  <!-- Buttons -->
+  <div id="tabs">
+    <div role="button" class="goog-inline-block jfk-button jfk-button-primary" id="createClass">Create a Class</div>
+    <div role="button" class="goog-inline-block jfk-button jfk-button-primary" id="createObject">Create an Object</div>
+    <a rel="#issuerIdDiv" id="changeId">
+      <div role="button" class="goog-inline-block jfk-button jfk-button-standard">Issuer Id</div>
+    </a>
+    <div role="button" class="goog-inline-block jfk-button jfk-button-standard"  id="viewClasses">View Classes</div>
+  </div>
+
+  <!-- No items text -->
+  <div id="ensure">
+    Ensure you have set the correct issuer ID and try again.
+  </div>
+  <div id="noClasses">
+    You have no classes. Try creating one using the button above.
+  </div>
+  <div id="noObjects">You have no objects. Try creating one and having it saved.</div>
+
+  <!-- Issuer id overlay / html -->
+  <div id="issuerIdDiv" class="overlay">
+    <h1>Issuer Id</h1>
+    <span id="noId">Please enter your issuer ID using the input below.</span>
+    <input class="editable" id="issuerId" />
+    <div role="button" class="goog-inline-block jfk-button jfk-button-standard"
+        id="loadClasses">
+      Load Classes
+    </div>
+  </div>
+
+  <!-- Isotope container -->
+  <div id="content">
+    <!-- Placeholder for infinite scroll to function correctly -->
+    <div></div>
+  </div>
+
+  <!-- Infinite scroll next page -->
+  <a id="next" href="/classlist?page=2"></a>
+  <div id="spinner"></div>
+
+  <!-- JWT Overlay -->
+  <div id="jwt" class="overlay">
+    <h1>JWT</h1>
+    <label for="origins">Origins:</label>
+    <input class="editable" id="origins"
+        placeholder="http://example.com,http://example2.com,..." /><br />
+    <textarea id="jwtText" class="inv"></textarea>
+    <input class="inv divId" />
+    <div role="button"
+        class="goog-inline-block jfk-button jfk-button-action right"
+        id="genJwt">
+      Generate JWT
+    </div>
+  </div>
+  <!-- Locations overlay -->
+  <div id="locations" class="overlay">
+    <input type="text" class="jfk-textinput" id="placesSearch"
+        placeholder="Search places..." />
+    <div id="map-canvas"></div>
+    <h2 id="locationsHeader"></h2>
+    <div id="locationsBox">
+      <h2>Locations</h2>
+      <em>Tap an orange marker to add it</em>
+      <ul id="locationList"></ul>
+      <div class="spinner"></div>
+      <div role="button"
+          class="goog-inline-block jfk-button jfk-button-standard"
+          id="viewMyPlaces">
+        View All
+      </div>
+      <div role="button"
+          class="goog-inline-block jfk-button jfk-button-action"
+          id="saveLocations">
+        Save
+      </div>
+    </div>
+    <input class="inv divId" />
+  </div>
+
+  <!-- Add message overlay -->
+  <div id="addMessage" class="overlay">
+    <h1 id="messageHeader"></h1>
+
+    <input class="editable right" name="header" />
+    <label>Header:</label>
+    <div class="clear"></div>
+
+    <textarea class="editable right" name="body"></textarea>
+    <label>Body:</label>
+    <div class="clear"></div>
+
+    <label class="header">Display Interval</label>
+      <input class="editable right dateinput"
+          name="displayInterval.start.date" />
+      <div class="inv datepicker"></div>
+      <input class="inv" id="focused" />
+      <label>Start:</label>
+      <div class="clear"></div>
+      <input class="editable right dateinput"
+          name="displayInterval.end.date" />
+      <label>End:</label>
+    <div class="clear"></div>
+
+    <label class="header">Action URI</label>
+      <input class="editable right" name="actionUri.uri"
+          placeholder="http://example.com" />
+      <label>Uri:</label>
+      <div class="clear"></div>
+      <input class="editable right" name="actionUri.description" />
+      <label>Description:</label>
+    <div class="clear"></div>
+
+    <label class="header">Image</label>
+      <input class="editable right" name="image.sourceUri.uri"
+          placeholder="http://example.com/example.jpg" />
+      <label>Uri:</label>
+      <div class="clear"></div>
+      <input class="editable right" name="image.sourceUri.description" />
+      <label>Description:</label>
+    <div class="clear"></div>
+
+    <input class="inv divId" />
+    <div role="button"
+        class="goog-inline-block jfk-button jfk-button-action right"
+        id="postMessage">
+      Add Message
+    </div>
+  </div>
+
+  <!-- Add class html -->
+  <div id="addClass">
+    <div>
+      <div class="item">
+        <div class="addClass">Choose a Wallet Class:
+            <div class="goog-flat-menu-button jfk-select choose right">
+              <div class="goog-menu goog-menu-noicon" style="display:none; z-index: 2">
+                <div class="goog-menuitem">generic</div>
+                <div class="goog-menuitem">loyalty</div>
+                <div class="goog-menuitem">offer</div>
+              </div>
+            </div><div class="clear"></div>
+        </div>
+        <div class="addClass">Render Specs:
+          <div class="goog-flat-menu-button jfk-select generic specs right">
+            <div class="goog-menu goog-menu-noicon" style="display:none; z-index: 2">
+              <div class="goog-menuitem">1.generic1</div>
+              <div class="goog-menuitem">1.generic2</div>
+              <div class="goog-menuitem">1.generic3</div>
+            </div>
+          </div>
+          <div class="goog-flat-menu-button jfk-select loyalty specs right">
+            <div class="goog-menu goog-menu-noicon" style="display:none; z-index: 2">
+              <div class="goog-menuitem">1.loyaltyCard1</div>
+              <div class="goog-menuitem">1.loyaltyCard2</div>
+            </div>
+          </div>
+          <div class="goog-flat-menu-button jfk-select offer specs right">
+            <div class="goog-menu goog-menu-noicon" style="display:none; z-index: 2">
+              <div class="goog-menuitem">1.offer1</div>
+            </div>
+          </div><div class="clear"></div>
+          <input class="inv template" value="1.generic1" /> <!-- Default -->
+          <input class="inv kind" value="generic" /> <!-- Default -->
+        </div>
+      </div>
+      <div class="footer">
+        <div role="button" class="goog-inline-block jfk-button jfk-button-action loadTemplate right"
+            style="-webkit-user-select: none;">Load Template</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

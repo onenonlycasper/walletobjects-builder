@@ -1,0 +1,47 @@
+<div class="jfk-freestanding-menu-button"
+    aria-expanded="false" role="button" aria-haspopup="true" style="-webkit-user-select: none;">
+</div>
+
+<div class="topTitle">
+  <div class="img left">
+    <img src="{{#if programLogo}}{{programLogo.sourceUri.uri}}{{else}}/stylesheets/image/Blank.png{{/if}}" />
+  </div>
+  <div class="header">
+    {{#if classId}}
+      <span class="title">{{programName}}</span><br/>
+      <span class="sub">{{issuerName}}</span>
+    {{else}}
+      <input class="editable title" value="{{programName}}" name="programName" placeholder="Program Name" />
+      <input class="editable sub" value="{{issuerName}}" name="issuerName" placeholder = "Issuer Name" />
+    {{/if}}
+
+    <span class="{{#unless classId}}object{{/unless}} half">
+      {{#if classId}}
+        <input class="label editable" value="{{loyaltyPoints.label}}"
+            placeholder="Points Label" name="loyaltyPoints.label" />
+        <br/>
+        <input class="label editable" value="{{loyaltyPoints.balance.string}}"
+            placeholder="Points Balance" name="loyaltyPoints.balance.string" />
+      {{else}}
+        POINTS<br/>CUSTOM
+      {{/if}}
+    </span><span class="{{#unless classId}}object{{/unless}} half">
+      {{#if classId}}
+        {{rewardsTierLabel}}<br/>{{rewardsTier}}
+      {{else}}
+        <input class="label editable" name="rewardsTierLabel" value="{{rewardsTierLabel}}"
+            placeholder="Tier Label" /><br/>
+        <input class="label editable" name="rewardsTier" value="{{rewardsTier}}"
+            placeholder="Tier" />
+      {{/if}}
+    </span>
+  </div>
+  <div class="clear"></div>
+</div>
+{{#unless classId}}
+  <div class="imgUri top editonly">
+    <label>Image Source Uri:</label>
+    <input class="editable src" value="{{programLogo.sourceUri.uri}}"
+        name="programLogo.sourceUri.uri" placeholder="http://www.example.com/example.jpg" />
+  </div>
+{{/unless}}

@@ -1,0 +1,61 @@
+  <span class="renderSpecs">{{#if renderSpecs}}{{getGexpanded renderSpecs}}{{/if}}</span>
+  <span class="version">Version {{version}}</span>
+</div><!-- Close item div before starting footer -->
+
+<div class="footer editonly">
+  <input name="kind" value="{{kind}}" class="inv kind" />
+  {{#if classId}}
+    <input name="classId" value="{{classId}}" class="inv classId" />
+  {{/if}}
+
+  <div>
+    Allow Multiple Users Per Object?
+    {{#if classId}}
+      <span class="right">{{getYesNo allowMultipleUsersPerObject}}</span>
+    {{else}}
+      <div class="right input toggle" name="allowMultipleUsersPerObject"></div>
+    {{/if}}
+    <div class="clear"></div>
+  </div>
+
+  {{#if classId}}
+    <span class="left">State:</span>
+    <div class="right state" name="state"></div>
+    <div class="clear"></div>
+  {{/if}}
+
+  {{#ifContains kind "walletobjects#offer"}}
+    <span class="left">Redemption Channel: </span>
+    {{#if classId}}
+      <span class="right tRight">{{redemptionChannel}}</span>
+    {{else}}
+      <div class="right redemptionChannel" name="redemptionChannel"></div>
+    {{/if}}
+    <br class="clear" />
+  {{/ifContains}}
+
+  {{#if needsjwt}}
+    <span class="left">ID: <input name="id" class="jfk-textinput editable id"
+        title="ID will be prepended with your issuer ID" /></span>
+    <div role="button" class="right jfk-button jfk-button-action jwtOverlay">
+      Get JWT
+    </div>
+  {{else}}
+    {{#if id}}
+      <span class="left">ID: {{id}}</span>
+          <input name="id" value="{{id}}" class="inv id" />
+    {{else}}
+      {{#ifContains kind "walletobjects#generic"}}
+        <span class="left">Issuer Name:</span>
+        <input name="issuerName" class="jfk-textinput editable right" />
+        <div class="clear"></div>
+      {{/ifContains}}
+      <span class="left">ID: <input name="id" class="jfk-textinput editable id"
+            title="ID will be prepended with your issuer ID" /></span>
+    {{/if}}
+    <div role="button" class="right jfk-button jfk-button-action save">
+      Save
+    </div>
+  {{/if}}
+</div>
+<div class="spinner"></div>

@@ -1,0 +1,16 @@
+<div class="uri" {{#unless isClass}}name="{{idx}}"{{/unless}}>
+  <img src="/stylesheets/image/globe.png" />
+  {{#unless isClass}}<button class="delLink editonly" type="button" title="Delete Link"></button>{{/unless}}
+  <input {{#if isClass}}class="noedit"{{else}}class="editable"{{/if}}
+      value="{{description}}"
+      {{#unless isClass}}name="issuerData.g_expanded.linksModule.uri{{idx}}.uri.description"{{/unless}}
+      placeholder="Uri Description" />
+  <div class="hUri {{#if classId}}ignore"{{else}}"{{/if}}>
+    <input {{#if isClass}}class="right noedit"{{else}}class="editable hidden"{{/if}}
+        value="{{uri}}"
+        {{#unless isClass}}name="issuerData.g_expanded.linksModule.uri{{idx}}.uri.uri"{{/unless}}
+        placeholder="http://www.example.com" />
+    <div class="clear"></div>
+  </div>
+</div>
+<h6 class="links {{#if isClass}}ignore{{/if}}"></h6>

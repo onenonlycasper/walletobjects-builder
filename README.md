@@ -30,7 +30,7 @@ the source code provided here.
 4. Import the Project
   * Open up Eclipse and click `File -> Import`
   * Make sure 'Existing Projects into Workspace' is selected then click `Next`
-  * Select root directory and browse for the `walletobjects-builder-js-java`
+  * Select root directory and browse for the `walletobjects-builder`
   directory you have downloaded
   * Click `Finish` and allow Eclipse to set up the project
 5. Get your private key

@@ -1,0 +1,16 @@
+<div class="linksDiv">
+  <button class="addLink editonly" type="button" title="Add Link"></button>
+  <h5>Links</h5>
+  <holder class="links ignore"></holder>
+  {{#if classLinks}}
+    {{getLinks classLinks true}}
+  {{/if}}
+  {{#if issuerData.g_expanded.linksModule}}
+    {{getLinks issuerData.g_expanded.linksModule false}}
+  {{else}}
+    {{#unless classLinks}}
+      <span class="center holder">No links to display. <br />
+      Click the plus button to add more. <h6></h6></span>
+    {{/unless}}
+  {{/if}}
+</div>

@@ -1,0 +1,16 @@
+<div class="issuerDataImageModule">
+  <span>
+    <img src=
+        {{#if issuerData.g_expanded.imageModule}}
+          "{{issuerData.g_expanded.imageModule.mainImage.image.sourceUri.uri}}"
+        {{else}}
+          "/stylesheets/image/BlankImgModule.png"
+        {{/if}}
+        class="mainImage" />
+  </span>
+  <div class="imgUri editonly">
+    <label>Image Source Uri:</label>
+    <input class="editable src" value="{{issuerData.g_expanded.imageModule.mainImage.image.sourceUri.uri}}"
+        name="issuerData.g_expanded.imageModule.mainImage.image.sourceUri.uri" placeholder="http://www.example.com/example.jpg" />
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<div class="barcode">
+  <span class="center
+  {{#if classId}}
+    "><input class="editable label" value="{{barcode.label}}" name="barcode.label" placeholder="Barcode Label" /><br/>
+  {{else}}
+    object">Barcode Label
+  {{/if}}
+  {{#if classId}}
+    <canvas class="barcodeImg"></canvas>
+    <div class="barcodeOutput"></div>
+    <span class="templateonly">{{barcode.type}}<br/></span>
+    <div name="barcode.type" class="editonly barcodetype"></div>
+    <label>Value:</label>
+    <input class="editable values" value="{{barcode.value}}" name="barcode.value" placeholder="Value" />
+    <br/><label>Alt Text:</label>
+    <input class="editable values" value="{{barcode.alternateText}}" name="barcode.alternateText" placeholder="Alt Text" />
+  </span>
+  {{else}}
+    <img class="center" src="/stylesheets/image/barcode.png" />
+  {{/if}}
+</div>

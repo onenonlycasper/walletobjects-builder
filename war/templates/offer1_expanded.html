@@ -1,0 +1,101 @@
+<div class="jfk-freestanding-menu-button"
+    aria-expanded="false" role="button" aria-haspopup="true" style="-webkit-user-select: none;">
+</div>
+
+<div class="topTitle">
+  <div class="img right">
+    <img src="{{#if titleImage}}{{titleImage.sourceUri.uri}}{{else}}/stylesheets/image/Blank.png{{/if}}" />
+  </div>
+  <div class="header">
+    {{#if classId}}
+      <span class="title">{{issuerName}}</span><br/>
+      <span class="sub">{{title}}</span>
+    {{else}}
+      <input class="editable title" value="{{issuerName}}" name="issuerName" placeholder="Issuer Name" />
+      <input class="editable sub" value="{{title}}" name="title" placeholder="Offer Title" />
+    {{/if}}
+  </div>
+  <div class="clear"></div>
+</div>
+{{#unless classId}}
+  <div class="imgUri top editonly">
+    <label>Image Source Uri:</label>
+    <input class="editable src" value="{{titleImage.sourceUri.uri}}"
+        name="titleImage.sourceUri.uri" placeholder="http://www.example.com/example.jpg" />
+  </div>
+{{/unless}}
+
+<h6></h6>
+{{>barcode}}
+<h6></h6>
+
+<div class="cols">
+  <span class="half">
+    USE BY: <br/>
+    {{#if classId}}
+      <input class="editable dateinput"
+          {{#if validTimeInterval}}
+            value="{{getFormattedDate validTimeInterval.end.date}}"
+          {{/if}}
+          placeholder="End date"
+          name="validTimeInterval.end.date" />
+      <div class="inv datepicker"></div>
+    {{else}}
+      <span class="object">MONTH DD YYYY</span>
+    {{/if}}
+  </span><span class="half">
+    VIA: <br/>
+    {{#if classId}}
+      {{provider}}
+    {{else}}
+      <input class="editable" value="{{provider}}" name="provider" placeholder="Provider"/>
+    {{/if}}
+  </span>
+</div>
+
+<h6></h6>
+
+<h5>Details</h5>
+{{#if classId}}
+  <div class="details">{{details}}</div>
+{{else}}
+  <textarea class="details{{#unless classId}} editable{{/unless}}"
+      name="details" placeholder="Type details...">{{details}}</textarea>
+{{/if}}
+
+<h5>Terms</h5>
+{{#if classId}}
+  <div class="finePrint">{{finePrint}}</div>
+{{else}}
+  <textarea class="finePrint{{#unless classId}} editable{{/unless}}"
+      name="finePrint" placeholder="Type terms...">{{finePrint}}</textarea>
+{{/if}}
+
+<h6></h6>
+
+<div class="linksDiv">
+  <h5>Links</h5>
+  <div class="uri">
+    <img src="/stylesheets/image/globe.png" />
+    {{#if classId}}
+      <span>{{helpUri.description}}</span>
+    {{else}}
+      <input class="editable" value="{{helpUri.description}}"
+          name="helpUri.description" placeholder="Help Uri Description" />
+    {{/if}}
+     <div class="hUri {{#if classId}}ignore"{{else}}"{{/if}}>
+      {{#if classId}}
+        <span>{{helpUri.uri}}</span>
+      {{else}}
+        <input class="editable hidden" value="{{helpUri.uri}}" 
+            name="helpUri.uri"
+            placeholder="Help Uri" />
+      {{/if}}
+    </div>
+  </div>
+  <h6></h6>
+  {{>homepage}}
+</div>
+
+<h6></h6>
+{{>footer}}

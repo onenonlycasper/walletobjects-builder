@@ -1,0 +1,12 @@
+<div class="linksDiv">
+  <button class="addLink editonly" type="button" title="Add Link"></button>
+  <h5>Links</h5>
+  {{>homepage}}
+  <h6 class="links ignore"></h6>
+  {{#if classLinks}}
+    {{getLinks classLinks true}}
+  {{/if}}
+  {{#if issuerData.g_expanded.linksModule}}
+    {{getLinks issuerData.g_expanded.linksModule false}}
+  {{/if}}
+</div>

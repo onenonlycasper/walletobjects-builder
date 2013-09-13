@@ -1,0 +1,18 @@
+<div class="uri">
+  <img src="/stylesheets/image/globe.png" />
+  {{#if classId}}
+    <span>{{homepageUri.description}}</span>
+  {{else}}
+    <input class="editable" value="{{homepageUri.description}}"
+        name="homepageUri.description" placeholder="Homepage Uri Description" />
+  {{/if}}<div class="clear"></div>
+  <div class="hUri {{#if classId}}ignore"{{else}}"{{/if}}">
+    {{#if classId}}
+      <span>{{homepageUri.uri}}</span>
+    {{else}}
+      <input class="editable hidden" value="{{homepageUri.uri}}" name="homepageUri.uri"
+          placeholder="Homepage Uri" />
+    {{/if}}
+    <div class="clear"></div>
+  </div>
+</div>

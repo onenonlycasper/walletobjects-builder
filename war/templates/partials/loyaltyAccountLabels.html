@@ -1,0 +1,32 @@
+<div class="cols loyalty"
+    style="background-color:{{issuerData.g_expanded.infoModule.backgroundColor.string}};
+    color: {{issuerData.g_expanded.infoModule.fontColor.string}};">
+  <span class="{{#unless classId}}object{{/unless}} half">
+    {{#if classId}}
+      {{accountNameLabel}}<br/>
+      <input class="label editable" name="accountName" 
+          value="{{accountName}}"
+          style="color: {{issuerData.g_expanded.infoModule.fontColor.string}};"
+          placeholder="Account Name" />
+    {{else}}
+      <input class="editable" value="{{accountNameLabel}}" 
+          placeholder="Account Name Label"
+          name="accountNameLabel"
+          style="color: {{issuerData.g_expanded.infoModule.fontColor.string}};" /><br/>ACCOUNT NAME
+    {{/if}}
+  </span><span class="{{#unless classId}}object{{/unless}} half">
+    {{#if classId}}
+      {{accountIdLabel}}<br/>
+      <input class="label editable" name="accountId" 
+          value="{{accountId}}"
+          style="color: {{issuerData.g_expanded.infoModule.fontColor.string}};"
+          placeholder="Account Id" />
+    {{else}}
+      <input class="editable" 
+          value="{{accountIdLabel}}" 
+          placeholder="ID Name Label"
+          name="accountIdLabel"
+          style="color: {{issuerData.g_expanded.infoModule.fontColor.string}};" /><br/>ACCOUNT ID
+    {{/if}}
+  </span>
+</div>

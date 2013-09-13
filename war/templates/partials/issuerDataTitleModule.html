@@ -1,0 +1,37 @@
+<div class="jfk-freestanding-menu-button"
+    aria-expanded="false" role="button" aria-haspopup="true" style="-webkit-user-select: none;">
+</div>
+
+<div class="topTitle">
+  <div class="img left iss">
+    <img src=
+        {{#if titleImage}}
+          "{{titleImage.sourceUri.uri}}"
+        {{else}}
+          "/stylesheets/image/Blank.png"
+        {{/if}} />
+  </div>
+  <div class="header">
+    {{#if classId}}
+      <span class="title">{{title}}</span><br />
+      <span class="sub">{{description}}</span>
+    {{else}}
+      <input class="editable title" value="{{title}}"
+          name="title" placeholder = "Title" />
+      <input class="editable sub" value="{{description}}"
+          name="description"  placeholder="Description" />
+    {{/if}}
+    <input class="editable label" value="{{issuerData.g_expanded.titleModule.row0.col0.label.string}}"
+        name="issuerData.g_expanded.titleModule.row0.col0.label.string" placeholder="Label" />
+    <input class="editable label" value="{{issuerData.g_expanded.titleModule.row0.col0.value.string}}"
+        name="issuerData.g_expanded.titleModule.row0.col0.value.string" placeholder="Value" />
+  </div>
+  <div style="clear:both"></div>
+</div>
+{{#unless classId}}
+  <div class="imgUri top editonly">
+    <label>Image Source Uri:</label>
+    <input class="editable src" value="{{titleImage.sourceUri.uri}}"
+        name="titleImage.sourceUri.uri" placeholder="http://www.example.com/example.jpg" />
+  </div>
+{{/unless}}

@@ -1,0 +1,50 @@
+<div class="msgDiv">
+  <button type="button" class="addMessage editonly" title="Add Message"></button>
+  <h5>Messages</h5>
+  <ul class="messages">
+    {{#if messages}}
+        {{#revEach messages false}}
+          <li class="{{getInv total index}}">
+            <div class="right">
+              <img src="{{#if image}}{{image.sourceUri.uri}}{{else}}/stylesheets/image/Blank.png{{/if}}" />
+              <button type="button" class="delMessage editonly" name="{{index}}" title="Delete Message">-</button>
+            </div>
+            <div class="left">
+              <input class="editable h3" value="{{header}}" placeholder="Header"
+                  name="messages.{{index}}.header" />
+              <textarea class="editable body" name="messages.{{index}}.body"
+                placeholder="Type body...">{{body}}</textarea>
+            </div>
+            <div class="clear"></div>
+            <div class="imgUri editonly">
+              <label>Action Uri:</label>
+              <input class="editable" value="{{actionUri.uri}}"
+                      name="messages.{{index}}.actionUri.uri" placeholder="Action URI" />
+              <label>Image Source Uri:</label>
+              <input class="editable src" value="{{image.sourceUri.uri}}"
+                  name="messages.{{index}}.image.sourceUri.uri"
+                  placeholder="http://www.example.com/example.jpg" />
+            </div>
+          </li>
+        {{/revEach}}
+    {{else}}
+      {{#unless classMessages}}
+        <span class="holder">No messages to display.<br />Click the plus button to add more.<h6></h6></span>
+      {{/unless}}
+    {{/if}}
+    {{#if classMessages}}
+      {{#revEach classMessages true}}
+        <li class="ignore">
+          <div class="right">
+            <img src="{{#if image}}{{image.sourceUri.uri}}{{else}}/stylesheets/image/Blank.png{{/if}}" />
+          </div>
+          <div class="left">
+            <h3>{{header}}</h3>
+            <div class="body" placeholder="Type body...">{{body}}</div>
+          </div>
+          <div class="clear"></div>
+        </li>
+      {{/revEach}}
+    {{/if}}
+  </ul>
+</div>
