@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Wallet Objects - Login</title>
+
+<script type="text/javascript">
+  (function() {
+   var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+   po.src = 'https://apis.google.com/js/client:plusone.js';
+   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+ })();
+  function signinCallback(authResult) {
+	  if (authResult['status']['signed_in']) {
+	    // Update the app to reflect a signed in user
+	    // Hide the sign-in button now that the user is authorized, for example:
+	    alert("user is signed in!");
+	    document.getElementById('signinButton').setAttribute('style', 'display: none');
+        gapi.client.load('plus','v1', loadProfile);  // Trigger request to get the email address.
+	  } else {
+	    // Update the app to reflect a signed out user
+	    // Possible error values:
+	    //   "user_signed_out" - User is signed-out
+	    //   "access_denied" - User denied access to your app
+	    //   "immediate_failed" - Could not automatically log in the user
+	    console.log('Sign-in state: ' + authResult['error']);
+	  }
+	}
+  function loadProfile(){
+    var request = gapi.client.plus.people.get( {'userId' : 'me'} );
+    request.execute(loadProfileCallback);
+  }
+  function loadProfileCallback(obj) {
+    profile = obj;
+    document.getElementById('name').innerHTML = profile['displayName'];
+    document.getElementById('pic').innerHTML = '<img src="' + profile['image']['url'] + '" />';
+    document.getElementById('id').innerHTML = profile['id'];
+  }
+ </script>
+</head>
+
+<body>
+  <div id="topBar">
+    <div id="title">
+      <h1>Google Wallet Objects</h1>
+    </div>
+  </div>
+
+  <!-- Issuer id overlay / html -->
+  <div id="issuerIdDiv" class="overlay">
+    <h1>Click here to login</h1>
+		<span id="signinButton"> <span class="g-signin"
+			data-callback="signinCallback" data-clientid="632306079434-huqikt9vu29fn46r1p32u8ucvs62kocq.apps.googleusercontent.com"
+			data-cookiepolicy="single_host_origin"
+			data-scope="profile"> </span>
+		</span>
+		<div id="profile">
+			<div>
+				<span id="pic"></span> <span id="name"></span>
+			</div>
+
+			<div id="id"></div>
+		</div>
+	</div>
+
+</body>
+</html>
